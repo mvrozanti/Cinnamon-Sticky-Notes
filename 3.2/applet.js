@@ -1706,21 +1706,6 @@ MyApplet.prototype = {
         settings.bind("overlay-key","overlayKey",this._updateKeybinding);
         this.menu = new Menu(this, this.orientation);
         noteBox = new NoteBox(this.menu);
-        noteBox.connect("pin-changed", Lang.bind(this, this.stateChanged));
-        if(noteBox.notes.length > 0){
-            noteBox.notes[0].text.connect("key-press-event", Lang.bind(noteBox.notes[0], function(action,event){
-                if(event.get_key_symbol() == Clutter.KEY_Escape){
-                    //noteBox.unpinNotes();
-                    noteBox.hideNotes();
-                    //unfocusText(noteBox.notes[0]);
-                    noteBox.notes[0].unfocusText();
-                    noteBox.lowerNotes();
-                    noteBox.unpinNotes();
-                    noteBox.hideNotes();
-                    //this.menu.toggle();
-                }
-            }));
-        }
         settings.bindWithObject(settings, "displayState", "displayState");
         settings.bind("templates", "templates");
         this.set_applet_icon_symbolic_path(this.metadata.path+"/icons/sticky-symbolic.svg");
